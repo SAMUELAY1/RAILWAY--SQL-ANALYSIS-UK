@@ -1,4 +1,4 @@
-# RAILWAY--SQL-ANALYSIS-UK
+# uk-rail-sql-analysis
 This is an SQL analysis made based on the railway raw  data to get insights on trains schedules and routes 
 
 ## UK Rail Journey Analysis (SQL)
