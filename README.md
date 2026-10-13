@@ -14,21 +14,33 @@ UK Train Rides
 (Kaggle) — 31,653 UK rail journeys, Jan–Apr 2024, covering ticket purchases, 
 journey status, delay reasons, and refund requests.
 
+## Repository structure
+
+├── sql/
+│   ├── 01_schema.sql
+│   ├── 02_top_delayed_routes.sql
+│   ├── 03_monthly_revenue_trend.sql
+│   ├── 04_above_average_priced_tickets.sql
+│   └── 05_refund_rate_by_delay_reason.sql
+├── data/
+│   └── railway.csv
+└── README.md
+
 ## Setup (MySQL)
 
-1. Run sql/01_schema.sql to create the uk_rail database and railway table.
-2. In MySQL Workbench: right-click the railway table → Table Data Import 
-3. Wizard → select data/railway.csv → run the import.
-4. Run the index command at the bottom of 01_schema.sql  this is required 
-5. for query 04 to complete in reasonable time (see note in that file).
-6. Run any query in sql/ directly in a Workbench SQL tab.
+1. Run `sql/01_schema.sql` to create the `uk_rail` database and `railway` table.
+2. In MySQL Workbench, right-click the `railway` table, choose **Table Data Import Wizard**, select `data/railway.csv` and run the import.
+3. Run the index command at the bottom of `sql/01_schema.sql`. This is required for query 04 to finish in a reasonable time (see the note in that file).
+4. Run any query in `sql/` from a Workbench SQL tab.
 
 ## Analysis
-File	Question	SQL concepts
-02_top_delayed_routes.sql	Which routes have the worst delay/cancellation record, ranked?	CTE, RANK() window function
-03_monthly_revenue_trend.sql	How is revenue trending month over month?	Running total window function, LAG()
-04_above_average_priced_tickets.sql	Which tickets are priced well above the norm for their route?	CTE + JOIN (rewritten from a correlated subquery for performance see note in file)
-05_refund_rate_by_delay_reason.sql	Which delay reasons trigger the most refund requests?	Aggregation, HAVING, conditional SUM
+
+| File | Question | SQL concepts |
+|------|----------|--------------|
+| [sql/02_top_delayed_routes.sql](sql/02_top_delayed_routes.sql) | Which routes have the worst delay/cancellation record, ranked? | CTE, `RANK()` window function |
+| [sql/03_monthly_revenue_trend.sql](sql/03_monthly_revenue_trend.sql) | How is revenue trending month over month? | Running total window function, `LAG()` |
+| [sql/04_above_average_priced_tickets.sql](sql/04_above_average_priced_tickets.sql) | Which tickets are priced well above the norm for their route? | CTE + `JOIN` (rewritten from a correlated subquery for performance, see note in file) |
+| [sql/05_refund_rate_by_delay_reason.sql](sql/05_refund_rate_by_delay_reason.sql) | Which delay reasons trigger the most refund requests? | Aggregation, `HAVING`, conditional `SUM` |
 
 ## Findings
 
